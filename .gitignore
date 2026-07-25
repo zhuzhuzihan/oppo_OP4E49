@@ -43,8 +43,8 @@ modules.order
 # Build output
 out/
 build/
+work/
 *.zip
-*.img
 
 # IDE files
 .idea/
