@@ -46,6 +46,11 @@ build/
 work/
 *.zip
 
+# Stock images
+boot.img
+recovery.img
+dtbo
+
 # IDE files
 .idea/
 .vscode/
