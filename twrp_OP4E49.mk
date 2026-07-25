@@ -1,7 +1,10 @@
-DEVICE_PATH := device/oppo/OP4E49
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product-if-exists, vendor/twrp/config/common.mk)
+$(call inherit-product, device/oppo/OP4E49/device.mk)
+
+PRODUCT_COPY_FILES += \
+    device/oppo/OP4E49/init.recovery.mt6853.rc:recovery/root/init.recovery.mt6853.rc
 
 # OrangeFox product
 PRODUCT_DEVICE := OP4E49
@@ -9,8 +12,6 @@ PRODUCT_NAME := twrp_OP4E49
 PRODUCT_BRAND := OPPO
 PRODUCT_MODEL := PECM30
 PRODUCT_MANUFACTURER := OPPO
-
-PRODUCT_GMS_CLIENTID_BASE := android-oppo
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="full_k6853v1_64-user 11 RP1A.200720.011 mp1tc16sp release-keys"

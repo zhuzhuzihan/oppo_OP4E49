@@ -1,44 +1,40 @@
-# OrangeFox recovery.fstab for OPPO PECM30 (OP4E49)
-# Mount point  partition              type  flags
+# Logical partitions
+system /system ext4 ro wait,,avb=vbmeta_system,logical,first_stage_mount
+vendor /vendor ext4 ro wait,,avb,logical,first_stage_mount
+product /product ext4 ro wait,,avb,logical,first_stage_mount
+my_odm /odm ext4 ro wait,logical,first_stage_mount,nofail
+my_product /my_product ext4 ro wait,logical,first_stage_mount,nofail
+my_engineering /my_engineering ext4 ro wait,logical,first_stage_mount,nofail
+my_company.netease /my_company ext4 ro,barrier=1 wait,logical,first_stage_mount,nofail
+my_carrier.vdf /my_carrier ext4 ro,barrier=1 wait,logical,first_stage_mount,nofail
+my_region.japan /my_region ext4 ro,barrier=1 wait,logical,first_stage_mount,nofail
+my_heytap.x /my_heytap ext4 ro,barrier=1 wait,logical,first_stage_mount,nofail
+my_stock.x /my_stock ext4 ro,barrier=1 wait,logical,first_stage_mount,nofail
+my_preload.x /my_preload ext4 ro wait,logical,first_stage_mount,nofail
 
-# Logical partitions (dynamic)
-/system         ext4    /dev/block/mapper/system                      flags=display="System";backup=1;flashimg=1;wipeingui;logical
-/vendor         ext4    /dev/block/mapper/vendor                      flags=display="Vendor";backup=1;flashimg=1;wipeingui;logical
-/product        ext4    /dev/block/mapper/product                     flags=display="Product";backup=1;flashimg=1;wipeingui;logical
+# Writable filesystems
+/dev/block/by-name/md_udc /metadata ext4 noatime,nosuid,nodev,discard wait,formattable,first_stage_mount
+/dev/block/by-name/cache /cache ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable,first_stage_mount
+/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v1
 
-# Data
-/data           f2fs    /dev/block/by-name/userdata                   flags=display="Internal Storage";settingsstorage;backup=1;encryptable=footer;length=-16384;fileencryption=aes-256-xts:aes-256-cts:v1
+# Image partitions
+/dev/block/by-name/boot /boot emmc defaults first_stage_mount,nofail
+/dev/block/by-name/recovery /recovery emmc defaults first_stage_mount,nofail
+/dev/block/by-name/dtbo /dtbo emmc defaults defaults
+/dev/block/by-name/vbmeta /vbmeta emmc defaults defaults
+/dev/block/by-name/vbmeta_system /vbmeta_system emmc defaults first_stage_mount,nofail
+/dev/block/by-name/vbmeta_vendor /vbmeta_vendor emmc defaults first_stage_mount,nofail
+/dev/block/by-name/misc /misc emmc defaults defaults
 
-# Boot partitions
-/boot           emmc    /dev/block/by-name/boot                       flags=display="Boot";backup=1;flashimg=1
-/recovery       emmc    /dev/block/by-name/recovery                   flags=display="Recovery";backup=1;flashimg=1
+# Device-specific partitions
+/dev/block/by-name/protect1 /mnt/vendor/protect_f ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/by-name/protect2 /mnt/vendor/protect_s ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/by-name/nvdata /mnt/vendor/nvdata ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/by-name/nvcfg /mnt/vendor/nvcfg ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/by-name/frp /persistent emmc defaults defaults
+/dev/block/by-name/nvram /nvram emmc defaults defaults
+/dev/block/by-name/logo /logo emmc defaults defaults
 
-# vbmeta
-/vbmeta         emmc    /dev/block/by-name/vbmeta                     flags=display="Vbmeta";backup=1;flashimg=1
-/vbmeta_system  emmc    /dev/block/by-name/vbmeta_system              flags=display="Vbmeta System";backup=1;flashimg=1
-/vbmeta_vendor  emmc    /dev/block/by-name/vbmeta_vendor              flags=display="Vbmeta Vendor";backup=1;flashimg=1
-
-# Metadata
-/metadata       ext4    /dev/block/by-name/md_udc                     flags=display="Metadata";backup=1;flashimg=1;formattable
-
-# Cache
-/cache          ext4    /dev/block/by-name/cache                      flags=display="Cache";backup=1;flashimg=1;wipeingui;wipeingui;logical
-
-# Vendor partitions
-/mnt/vendor/protect_f   ext4    /dev/block/by-name/protect1           flags=display="Protect1";backup=1;flashimg=1
-/mnt/vendor/protect_s   ext4    /dev/block/by-name/protect2           flags=display="Protect2";backup=1;flashimg=1
-/mnt/vendor/nvdata      ext4    /dev/block/by-name/nvdata             flags=display="NVData";backup=1;flashimg=1
-/mnt/vendor/nvcfg       ext4    /dev/block/by-name/nvcfg              flags=display="NVCfg";backup=1;flashimg=1
-
-# USB OTG
-/usb-otg        vfat    /dev/block/sdd1                               flags=display="USB OTG";storage;wipeingui;removable
-/usbotg         vfat    /dev/block/by-name/special_preload            flags=display="USB OTG Alt";storage;wipeingui;removable
-
-# SD card
-/external_sd    auto    /devices/platform/externdevice*               flags=display="MicroSD";storage;wipeingui;removable;settingsstorage
-
-# Persistent
-/persistent     emmc    /dev/block/by-name/frp                        flags=display="Persistent";backup=1;flashimg=1
-
-# Misc
-/misc           emmc    /dev/block/by-name/misc                       flags=display="Misc";backup=1;flashimg=1
+# Removable storage
+/devices/platform/externdevice* auto auto defaults voldmanaged=sdcard1:auto
+/devices/platform/11200000.usb_xhci* auto vfat defaults voldmanaged=usbotg:auto

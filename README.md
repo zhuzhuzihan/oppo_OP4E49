@@ -28,7 +28,7 @@ Device tree for building OrangeFox Recovery for OPPO A53 5G (PECM30).
 5. Fill in the parameters:
    - **MANIFEST_BRANCH**: `12.1`
    - **BUILD_TARGET**: `recovery`
-   - **DEVICE_TREE_BRANCH**: `fox_12.1`
+   - **DEVICE_TREE_BRANCH**: `master`
    - **GH_RELEASE**: `true`
 6. Click **Run workflow**
 
