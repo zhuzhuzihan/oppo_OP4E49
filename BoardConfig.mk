@@ -69,5 +69,8 @@ BOARD_AVB_ROLLBACK_INDEX := 0
 # SELinux
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
+# Vendor
+TARGET_COPY_OUT_VENDOR := vendor
+
 # Build flags
 ALLOW_MISSING_DEPENDENCIES := true
