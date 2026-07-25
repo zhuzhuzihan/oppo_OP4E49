@@ -4,7 +4,8 @@ $(call inherit-product-if-exists, vendor/twrp/config/common.mk)
 $(call inherit-product, device/oppo/OP4E49/device.mk)
 
 PRODUCT_COPY_FILES += \
-    device/oppo/OP4E49/init.recovery.mt6853.rc:recovery/root/init.recovery.mt6853.rc
+    device/oppo/OP4E49/init.recovery.mt6853.rc:recovery/root/init.recovery.mt6853.rc \
+    device/oppo/OP4E49/prebuilt/dtb:dtb.img
 
 # OrangeFox product
 PRODUCT_DEVICE := OP4E49
