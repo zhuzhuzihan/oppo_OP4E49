@@ -7,6 +7,9 @@ PRODUCT_COPY_FILES += \
     device/oppo/OP4E49/init.recovery.mt6853.rc:recovery/root/init.recovery.mt6853.rc \
     device/oppo/OP4E49/prebuilt/dtb:dtb.img
 
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,device/oppo/OP4E49/recovery/root,recovery/root)
+
 # OrangeFox product
 PRODUCT_DEVICE := OP4E49
 PRODUCT_NAME := twrp_OP4E49
