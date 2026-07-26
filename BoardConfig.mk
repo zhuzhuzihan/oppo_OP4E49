@@ -66,6 +66,8 @@ BOARD_USES_RECOVERY_AS_BOOT := false
 TARGET_NO_RECOVERY := false
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+TARGET_COPY_OUT_VENDOR := vendor
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Prevent stock anti-rollback metadata from constraining recovery builds.
 PLATFORM_SECURITY_PATCH := 2099-12-31
