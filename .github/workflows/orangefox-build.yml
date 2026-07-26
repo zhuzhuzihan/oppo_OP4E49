@@ -66,3 +66,16 @@ jobs:
           BUILD_TARGET: ${{ github.event.inputs.BUILD_TARGET }}
           GH_RELEASE: ${{ github.event.inputs.GH_RELEASE }}
           MAINTAINER_URL: ''
+
+      - name: Upload build outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: OrangeFox-OP4E49-${{ github.run_id }}
+          path: |
+            /home/runner/work/_actions/UWU-TEAM/UWU-OrangeFox-Builder/v1.0.0/OrangeFox/fox_12.1/out/target/product/OP4E49/OrangeFox-*.img
+            /home/runner/work/_actions/UWU-TEAM/UWU-OrangeFox-Builder/v1.0.0/OrangeFox/fox_12.1/out/target/product/OP4E49/OrangeFox-*.img.md5
+            /home/runner/work/_actions/UWU-TEAM/UWU-OrangeFox-Builder/v1.0.0/OrangeFox/fox_12.1/out/target/product/OP4E49/OrangeFox-*.zip
+            /home/runner/work/_actions/UWU-TEAM/UWU-OrangeFox-Builder/v1.0.0/OrangeFox/fox_12.1/out/target/product/OP4E49/OrangeFox-*.zip.md5
+          if-no-files-found: warn
+          retention-days: 7
