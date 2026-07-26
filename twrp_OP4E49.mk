@@ -8,7 +8,7 @@ PRODUCT_COPY_FILES += \
     device/oppo/OP4E49/prebuilt/dtb:dtb.img
 
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/oppo/OP4E49/recovery/root,recovery/root)
+    $(call find-copy-subdir-files,*,device/oppo/OP4E49/recovery/root/vendor/app/mcRegistry,recovery/root/vendor/app/mcRegistry)
 
 # OrangeFox product
 PRODUCT_DEVICE := OP4E49

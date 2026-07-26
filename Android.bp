@@ -1,0 +1,132 @@
+cc_prebuilt_binary {
+    name: "op4e49_keymaster_service",
+    stem: "android.hardware.keymaster@4.0-service.trustonic",
+    srcs: ["recovery/root/system/bin/android.hardware.keymaster@4.0-service.trustonic"],
+    compile_multilib: "64",
+    recovery: true,
+    strip: { none: true },
+    check_elf_files: false,
+}
+
+cc_prebuilt_binary {
+    name: "op4e49_cryptoeng_service",
+    stem: "vendor.oplus.hardware.cryptoeng@1.0-service",
+    srcs: ["recovery/root/system/bin/hw/vendor.oplus.hardware.cryptoeng@1.0-service"],
+    compile_multilib: "64",
+    relative_install_path: "hw",
+    recovery: true,
+    strip: { none: true },
+    check_elf_files: false,
+}
+
+cc_prebuilt_binary {
+    name: "op4e49_gatekeeper_service",
+    stem: "android.hardware.gatekeeper@1.0-service",
+    srcs: ["recovery/root/vendor/bin/hw/android.hardware.gatekeeper@1.0-service"],
+    compile_multilib: "64",
+    relative_install_path: "hw",
+    recovery: true,
+    strip: { none: true },
+    check_elf_files: false,
+}
+
+cc_prebuilt_binary {
+    name: "op4e49_mc_driver_daemon",
+    stem: "mcDriverDaemon",
+    srcs: ["recovery/root/vendor/bin/mcDriverDaemon"],
+    compile_multilib: "64",
+    recovery: true,
+    strip: { none: true },
+    check_elf_files: false,
+}
+
+cc_defaults {
+    name: "op4e49_crypto_blob_defaults",
+    compile_multilib: "64",
+    recovery: true,
+    strip: { none: true },
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_libMcClient",
+    stem: "libMcClient",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    srcs: ["recovery/root/system/lib64/libMcClient.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_libtrustonic_keybox_ca",
+    stem: "libtrustonic_keybox_ca",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    srcs: ["recovery/root/system/lib64/libtrustonic_keybox_ca.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_liburee_meta_drmkeyinstall",
+    stem: "liburee_meta_drmkeyinstall",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    srcs: ["recovery/root/system/lib64/liburee_meta_drmkeyinstall.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_commondcs_hal",
+    stem: "vendor.oplus.hardware.commondcs@1.0",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    srcs: ["recovery/root/system/lib64/vendor.oplus.hardware.commondcs@1.0.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_cryptoeng_hal",
+    stem: "vendor.oplus.hardware.cryptoeng@1.0",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    srcs: ["recovery/root/system/lib64/vendor.oplus.hardware.cryptoeng@1.0.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_gatekeeper_impl",
+    stem: "android.hardware.gatekeeper@1.0-impl",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    relative_install_path: "hw",
+    srcs: ["recovery/root/vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_gatekeeper_default",
+    stem: "gatekeeper.default",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    relative_install_path: "hw",
+    srcs: ["recovery/root/vendor/lib64/hw/gatekeeper.default.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_gatekeeper_mt6853",
+    stem: "gatekeeper.mt6853",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    relative_install_path: "hw",
+    srcs: ["recovery/root/vendor/lib64/hw/gatekeeper.mt6853.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_gatekeeper_oppo6853",
+    stem: "gatekeeper.oppo6853",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    relative_install_path: "hw",
+    srcs: ["recovery/root/vendor/lib64/hw/gatekeeper.oppo6853.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_libMcGatekeeper",
+    stem: "libMcGatekeeper",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    relative_install_path: "hw",
+    srcs: ["recovery/root/vendor/lib64/hw/libMcGatekeeper.so"],
+}
+
+cc_prebuilt_library_shared {
+    name: "op4e49_libSoftGatekeeper",
+    stem: "libSoftGatekeeper",
+    defaults: ["op4e49_crypto_blob_defaults"],
+    relative_install_path: "hw",
+    srcs: ["recovery/root/vendor/lib64/hw/libSoftGatekeeper.so"],
+}
